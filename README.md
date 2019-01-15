@@ -1,0 +1,2 @@
+# supermarket_receipt_ADLM
+Projet architecture logicielle AMEKOU_DAUGUET_LAVALLART_MITSAKIS
