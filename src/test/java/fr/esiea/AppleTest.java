@@ -20,6 +20,12 @@ public class AppleTest {
 
         Receipt receipt = teller.checksOutArticlesFrom(cart);
 
+
         // Todo: complete this test
+        double bill = 2.5*1.99;
+
+        if(receipt.getTotalPrice() == bill){
+            System.out.println( "correct" );
+        }
     }
 }
