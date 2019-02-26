@@ -4,6 +4,10 @@ package fr.esiea.supermarket.model;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
+
 public class SupermarketTest {
 
     @Test
@@ -120,6 +124,61 @@ public class SupermarketTest {
 
     }
 
+    @Test
+    public void getTest(){
+        SupermarketCatalog catalog = new FakeCatalog();
+
+        Product toothpaste = new Product("toothpaste", ProductUnit.Each);
+        Assertions.assertThat(toothpaste.getUnit()).isEqualTo(ProductUnit.Each);
+        catalog.addProduct(toothpaste,5);
+
+
+        ShoppingCart cart = new ShoppingCart();
+        cart.addItemQuantity(toothpaste, 10);
+
+
+        // Offer getters
+        Offer offer = new Offer(SpecialOfferType.FiveForAmount,toothpaste,7);
+        Assertions.assertThat(offer.getProduct()).isEqualTo(toothpaste);
+
+        // Discount getters
+        Discount discount = new Discount(toothpaste,"two e free",2);
+        Assertions.assertThat(discount.getDescription()).isEqualTo("two e free");
+        Assertions.assertThat(discount.getProduct()).isEqualTo(toothpaste);
+        Assertions.assertThat(discount.getDiscountAmount()).isEqualTo(2);
+
+
+
+        Teller teller = new Teller(catalog);
+
+        Receipt receipt = new Receipt();
+        receipt.addProduct(toothpaste,2,5,10);
+        receipt.addDiscount(discount);
+
+        // ReceiptItem getters
+        ReceiptItem ritem = new ReceiptItem(toothpaste,2,5,10);
+        Assertions.assertThat(ritem.getPrice()).isEqualTo(5);
+        Assertions.assertThat(ritem.getQuantity()).isEqualTo(2);
+        Assertions.assertThat(ritem.getTotalPrice()).isEqualTo(10);
+        Assertions.assertThat(ritem.getProduct()).isEqualTo(toothpaste);
+
+        //Receipt getters
+        List<ReceiptItem> items = new ArrayList<ReceiptItem>();
+        items.add(ritem);
+        List<Discount> discounts = new ArrayList<Discount>();
+        discounts.add(discount);
+        Assertions.assertThat(receipt.getItems()).isEqualTo(items);
+        Assertions.assertThat(receipt.getDiscounts()).isEqualTo(discounts);
+        Assertions.assertThat(receipt.getTotalPrice()).isEqualTo(8);
+    }
+    @Test
+    public void equalsTest(){
+        Product toothpaste = new Product("toothpaste", ProductUnit.Each);
+        Assertions.assertThat(toothpaste.equals(toothpaste)).isTrue();
+
+        ReceiptItem ritem = new ReceiptItem(toothpaste,2,5,10);
+        Assertions.assertThat(ritem.equals(ritem)).isTrue();
+    }
 
 
 }
