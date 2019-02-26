@@ -1,4 +1,4 @@
-package fr.esiea;
+package fr.esiea.supermarket.model;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

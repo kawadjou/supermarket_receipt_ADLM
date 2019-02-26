@@ -1,4 +1,4 @@
-package fr.esiea;
+package fr.esiea.supermarket.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;

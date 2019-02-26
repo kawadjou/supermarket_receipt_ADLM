@@ -1,4 +1,4 @@
-package fr.esiea;
+package fr.esiea.supermarket.model;
 
 
 import org.assertj.core.api.Assertions;
