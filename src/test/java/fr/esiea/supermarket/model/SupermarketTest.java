@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
 public class SupermarketTest {
@@ -133,10 +134,6 @@ public class SupermarketTest {
         catalog.addProduct(toothpaste,5);
 
 
-        ShoppingCart cart = new ShoppingCart();
-        cart.addItemQuantity(toothpaste, 10);
-
-
         // Offer getters
         Offer offer = new Offer(SpecialOfferType.FiveForAmount,toothpaste,7);
         Assertions.assertThat(offer.getProduct()).isEqualTo(toothpaste);
@@ -174,11 +171,39 @@ public class SupermarketTest {
     @Test
     public void equalsTest(){
         Product toothpaste = new Product("toothpaste", ProductUnit.Each);
+        Product apples = new Product("apples", ProductUnit.Each);
         Assertions.assertThat(toothpaste.equals(toothpaste)).isTrue();
+        Assertions.assertThat(toothpaste.equals(apples)).isFalse();
+
 
         ReceiptItem ritem = new ReceiptItem(toothpaste,2,5,10);
+        ReceiptItem ritembis = new ReceiptItem(toothpaste,4,6,13);
         Assertions.assertThat(ritem.equals(ritem)).isTrue();
+        Assertions.assertThat(ritem.equals(ritembis)).isFalse();
+
+        Assertions.assertThat(ritem.equals(toothpaste)).isFalse();
+        Assertions.assertThat(toothpaste.equals(ritem)).isFalse();
+    }
+    @Test
+    public void hashcodeTest (){
+    Product toothpaste = new Product("toothpaste", ProductUnit.Each);
+    ReceiptItem ritem = new ReceiptItem(toothpaste,2,5,10);
+    Assertions.assertThat(ritem.hashCode()).isEqualTo(Objects.hash(toothpaste,5.0,10.0,2.0));
     }
 
+    @Test
+    public void shoppingCartTest(){
+        SupermarketCatalog catalog = new FakeCatalog();
+        Product toothpaste = new Product("toothpaste", ProductUnit.Each);
+        catalog.addProduct(toothpaste,5);
+        ShoppingCart cart = new ShoppingCart();
+        cart.addItemQuantity(toothpaste, 3);
+        cart.addItemQuantity(toothpaste, 3);
+        cart.addItem(toothpaste);
+        Teller teller = new Teller(catalog);
+        Receipt receipt = teller.checksOutArticlesFrom(cart);
+        Assertions.assertThat(receipt.getTotalPrice()).as("cart price").isEqualTo(35);
+
+    }
 
 }
