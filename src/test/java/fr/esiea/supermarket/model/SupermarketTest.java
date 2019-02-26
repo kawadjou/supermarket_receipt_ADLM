@@ -224,7 +224,6 @@ public class SupermarketTest {
         Product toothpaste = new Product("toothpaste", ProductUnit.Each);
         Product toothpaste2 = new Product("toothpaste", ProductUnit.Kilo);
         Product toothpaste3 = new Product("toothpaste", ProductUnit.Each);
-
         Product apples = new Product("apples", ProductUnit.Each);
         ReceiptItem ritem = new ReceiptItem(toothpaste,2,5,10);
         ReceiptItem ritem2 = new ReceiptItem(toothpaste,4,6,13);
