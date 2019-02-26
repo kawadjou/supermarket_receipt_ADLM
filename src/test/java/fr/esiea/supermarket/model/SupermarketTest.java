@@ -223,6 +223,8 @@ public class SupermarketTest {
     public void equalsTest(){
         Product toothpaste = new Product("toothpaste", ProductUnit.Each);
         Product toothpaste2 = new Product("toothpaste", ProductUnit.Kilo);
+        Product toothpaste3 = new Product("toothpaste", ProductUnit.Each);
+
         Product apples = new Product("apples", ProductUnit.Each);
         ReceiptItem ritem = new ReceiptItem(toothpaste,2,5,10);
         ReceiptItem ritem2 = new ReceiptItem(toothpaste,4,6,13);
@@ -232,9 +234,12 @@ public class SupermarketTest {
 
         Assertions.assertThat(toothpaste.equals(toothpaste)).isTrue();
         Assertions.assertThat(toothpaste.equals(apples)).isFalse();
+
         Assertions.assertThat(toothpaste.equals(null)).isFalse();
         Assertions.assertThat(toothpaste.equals(ritem)).isFalse();
+
         Assertions.assertThat(toothpaste.equals(toothpaste2)).isFalse();
+        Assertions.assertThat(toothpaste.equals(toothpaste3)).isTrue();
 
         Assertions.assertThat(ritem.equals(ritem)).isTrue();
         Assertions.assertThat(ritem.equals(ritem2)).isFalse();
