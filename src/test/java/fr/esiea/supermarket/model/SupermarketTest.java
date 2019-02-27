@@ -320,8 +320,8 @@ public class SupermarketTest {
         bundle.addProducttoBendle(toothpaste,2);
         bundle.addProducttoBendle(apples,2);
         teller.addBundle(bundle);
-       // Receipt receipt = teller.checksOutArticlesFrom(cart);
-      //  Assertions.assertThat(receipt.getTotalPrice()).as("cart price").isEqualTo(8);
+        Receipt receipt = teller.checksOutArticlesFrom(cart);
+        Assertions.assertThat(receipt.getTotalPrice()).as("cart price").isEqualTo(8);
 
         ShoppingCart cart2 = new ShoppingCart();
 
@@ -333,7 +333,7 @@ public class SupermarketTest {
         bundle2.addProducttoBendle(toothpaste,3);
         bundle2.addProducttoBendle(apples,3);
         teller2.addBundle(bundle2);
-        Receipt receipt2 = teller2.checksOutArticlesFrom(cart);
+        Receipt receipt2 = teller2.checksOutArticlesFrom(cart2);
         Assertions.assertThat(receipt2.getTotalPrice()).as("cart price").isEqualTo(10);
 
 
