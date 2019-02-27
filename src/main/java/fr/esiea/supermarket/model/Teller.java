@@ -14,6 +14,8 @@ public class Teller {
     private final SupermarketCatalog catalog;
     private Map<Product, Offer> offers = new HashMap<>();
     private List<Bundle> bundles= new ArrayList<>();
+    private List<Integer> modif = new ArrayList<>();
+    private List<Double> modifprix = new ArrayList<>();
     private double bundleamount = 0;
 
 
@@ -39,12 +41,19 @@ public class Teller {
                     if (itembundel.getProduct().equals(itemcart.getProduct()) && itembundel.getQuantity() <= itemcart.getQuantity()){
                         tmp+=1;
                         itemcart.setQuantity(itemcart.getQuantity() - itembundel.getQuantity());
+                        modif.add(productQuantities.indexOf(itemcart));
+                        modifprix.add(itembundel.getQuantity());
                     }
                 }
             }
             if (tmp == bd.getItems().size()) {
                bundleamount = bundleamount + bd.getPrice();
 
+            }
+            else {
+                for (int i=0; i<modif.size();i++){
+                    productQuantities.get(modif.get(i)).setQuantity( productQuantities.get(modif.get(i)).getQuantity() + modifprix.get(i));
+                }
             }
 
         }

@@ -320,8 +320,21 @@ public class SupermarketTest {
         bundle.addProducttoBendle(toothpaste,2);
         bundle.addProducttoBendle(apples,2);
         teller.addBundle(bundle);
-        Receipt receipt = teller.checksOutArticlesFrom(cart);
-        Assertions.assertThat(receipt.getTotalPrice()).as("cart price").isEqualTo(8);
+       // Receipt receipt = teller.checksOutArticlesFrom(cart);
+      //  Assertions.assertThat(receipt.getTotalPrice()).as("cart price").isEqualTo(8);
+
+        ShoppingCart cart2 = new ShoppingCart();
+
+        cart2.addItemQuantity(toothpaste, 3);
+        cart2.addItemQuantity(apples,2);
+
+        Teller teller2 = new Teller(catalog);
+        Bundle bundle2 = new Bundle(6);
+        bundle2.addProducttoBendle(toothpaste,3);
+        bundle2.addProducttoBendle(apples,3);
+        teller2.addBundle(bundle2);
+        Receipt receipt2 = teller2.checksOutArticlesFrom(cart);
+        Assertions.assertThat(receipt2.getTotalPrice()).as("cart price").isEqualTo(10);
 
 
     }
