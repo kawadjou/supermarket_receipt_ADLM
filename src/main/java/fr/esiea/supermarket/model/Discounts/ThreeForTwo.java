@@ -27,20 +27,20 @@ public class ThreeForTwo implements Offer{
     }
 
     @Override
-    public Map<Product, Double> calculateDiscount(Map<Product, Double> productQuantities, SupermarketCatalog catalog){
-        double quantity = productQuantities.get(productForOffer);
+    public Map<Product, Double> calcDiscount(Map<Product, Double> nbproducts, SupermarketCatalog catalog){
+        double quantity = nbproducts.get(productForOffer);
         double unitPrice = catalog.getUnitPrice(productForOffer);
         int quantityAsInt = (int) quantity;
         int numberOfXs= quantityAsInt/3;
 
-        if (quantityAsInt > 2){
+        if (quantityAsInt >= 3){
             double discountAmount = quantity * unitPrice - ((numberOfXs * 2 * unitPrice) + quantityAsInt % 3 * unitPrice);
             discount = new Discount(productForOffer, "3 for 2", discountAmount);
         }
 
-        productQuantities.put(productForOffer, (double)quantityAsInt % 3);
+        nbproducts.put(productForOffer, (double)quantityAsInt % 3);
 
-        return productQuantities;
+        return nbproducts;
     }
 
 }

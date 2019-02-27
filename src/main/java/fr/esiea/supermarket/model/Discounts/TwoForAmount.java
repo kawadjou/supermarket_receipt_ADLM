@@ -28,8 +28,8 @@ public class TwoForAmount implements Offer {
     }
 
     @Override
-    public Map<Product, Double> calculateDiscount(Map<Product, Double> productQuantities, SupermarketCatalog catalog){
-        double quantity = productQuantities.get(productForOffer);
+    public Map<Product, Double> calcDiscount(Map<Product, Double> nbproducts, SupermarketCatalog catalog){
+        double quantity = nbproducts.get(productForOffer);
         double unitPrice = catalog.getUnitPrice(productForOffer);
         int quantityAsInt = (int) quantity;
 
@@ -40,8 +40,8 @@ public class TwoForAmount implements Offer {
             discount = new Discount(productForOffer, "2 for " + this.argumentForOffer, discountN);
         }
 
-        productQuantities.put(productForOffer,(double)quantityAsInt % 2);
+        nbproducts.put(productForOffer,(double)quantityAsInt % 2);
 
-        return productQuantities;
+        return nbproducts;
     }
 }
