@@ -12,7 +12,7 @@ Projet architecture logicielle AMEKOU_DAUGUET_LAVALLART_MITSAKIS
  
 ## Auteurs
 
-* **DAUGUET Julien** - [Brookaid](https://github.com/Brookaid) Apparaissant aussi parfois sous le nom jdauguet
+* **DAUGUET Julien** - [Brookaid](https://github.com/Brookaid) (Apparaissant aussi parfois sous le nom jdauguet)
 * **LAVALLART Martin** - [MartinLav](https://github.com/MartinLav)
 * **AMEKOU Kwadjo** - [kawadjou](https://github.com/kawadjou)
 * **MITSAKIS Michella** - [mxmk28](https://github.com/mxmk28)

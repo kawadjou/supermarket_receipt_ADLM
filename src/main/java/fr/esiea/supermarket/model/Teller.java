@@ -1,8 +1,11 @@
 package fr.esiea.supermarket.model;
 
+import fr.esiea.supermarket.model.Discounts.Offer;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 
 public class Teller {
 
@@ -13,8 +16,8 @@ public class Teller {
         this.catalog = catalog;
     }
 
-    public void addSpecialOffer(SpecialOfferType offerType, Product product, double argument) {
-        this.offers.put(product, new Offer(offerType, product, argument));
+    public void addSpecialOffer(Offer SuperOffer) {
+        this.offers.put(SuperOffer.getProduct(),SuperOffer);
     }
 
     public Receipt checksOutArticlesFrom(ShoppingCart theCart) {

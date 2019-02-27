@@ -2,6 +2,7 @@ package fr.esiea.supermarket.model;
 
 
 import fr.esiea.supermarket.ReceiptPrinter;
+import fr.esiea.supermarket.model.Discounts.*;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -31,7 +32,7 @@ public class SupermarketTest {
         Assertions.assertThat(cart.getItems().size()).as("cart size").isEqualTo(1);
 
         Teller teller = new Teller(catalog);
-        teller.addSpecialOffer(SpecialOfferType.TenPercentDiscount, toothbrush, 10.0);
+        teller.addSpecialOffer(new TenPercent(toothbrush, 10.0));
 
         Receipt receipt = teller.checksOutArticlesFrom(cart);
         Assertions.assertThat(receipt.getTotalPrice()).as("cart price").isEqualTo(2.5*1.99);
@@ -56,13 +57,13 @@ public class SupermarketTest {
 
 
         Teller teller = new Teller(catalog);
-        teller.addSpecialOffer(SpecialOfferType.ThreeForTwo, toothbrush,0);
+        teller.addSpecialOffer(new ThreeForTwo(toothbrush));
 
         Teller teller2 = new Teller(catalog);
-        teller2.addSpecialOffer(SpecialOfferType.FiveForAmount, toothbrush,0);
+        teller2.addSpecialOffer(new FiveForAmount(toothbrush,0));
 
         Teller teller3 = new Teller(catalog);
-        teller3.addSpecialOffer(SpecialOfferType.ThreeForTwo, apples,0);
+        teller3.addSpecialOffer(new ThreeForTwo(apples));
 
 
         Receipt receipt = teller.checksOutArticlesFrom(cart);
@@ -94,8 +95,8 @@ public class SupermarketTest {
         cart.addItemQuantity(toothbrush, 3);
 
         Teller teller = new Teller(catalog);
-        teller.addSpecialOffer(SpecialOfferType.TenPercentDiscount, toothbrush, 10.0);
-        teller.addSpecialOffer(SpecialOfferType.TenPercentDiscount, apples, 10.0);
+        teller.addSpecialOffer(new TenPercent(toothbrush, 10.0));
+        teller.addSpecialOffer(new TenPercent( apples, 10.0));
 
         Receipt receipt = teller.checksOutArticlesFrom(cart);
 
@@ -117,7 +118,7 @@ public class SupermarketTest {
         cart2.addItemQuantity(toothpaste, 1);
 
         Teller teller = new Teller(catalog);
-        teller.addSpecialOffer(SpecialOfferType.TwoForAmount, toothpaste,3);
+        teller.addSpecialOffer(new TwoForAmount(toothpaste,3));
 
         Receipt receipt = teller.checksOutArticlesFrom(cart);
         Receipt receipt2 = teller.checksOutArticlesFrom(cart2);
@@ -142,11 +143,11 @@ public class SupermarketTest {
         cart2.addItemQuantity(toothpaste, 3);
 
         Teller teller = new Teller(catalog);
-        teller.addSpecialOffer(SpecialOfferType.FiveForAmount, toothpaste,7);
+        teller.addSpecialOffer(new FiveForAmount(toothpaste,7));
         Teller teller2 = new Teller(catalog);
-        teller2.addSpecialOffer(SpecialOfferType.ThreeForTwo, toothpaste,4);
+        teller2.addSpecialOffer(new ThreeForTwo(toothpaste));
         Teller teller3 = new Teller(catalog);
-        teller3.addSpecialOffer(SpecialOfferType.FiveForAmount, apples,7);
+        teller3.addSpecialOffer(new FiveForAmount( apples,7));
 
 
 
@@ -187,8 +188,8 @@ public class SupermarketTest {
 
 
         // Offer getters
-        Offer offer = new Offer(SpecialOfferType.FiveForAmount,toothpaste,7);
-        Assertions.assertThat(offer.getProduct()).isEqualTo(toothpaste);
+        //Offer offer = new Offer(SpecialOfferType.FiveForAmount,toothpaste,7);
+        //Assertions.assertThat(offer.getProduct()).isEqualTo(toothpaste);
 
         // Discount getters
         Discount discount = new Discount(toothpaste,"two e free",2);
@@ -286,7 +287,7 @@ public class SupermarketTest {
         cart.addItemQuantity(toothpaste, 3);
         cart.addItemQuantity(apples,1);
         Teller teller = new Teller(catalog);
-        teller.addSpecialOffer(SpecialOfferType.TenPercentDiscount, toothpaste, 10.0);
+        teller.addSpecialOffer(new TenPercent(toothpaste, 10.0));
         Receipt receipt = teller.checksOutArticlesFrom(cart);
         ReceiptPrinter printer = new ReceiptPrinter();
         ReceiptPrinter printer2 = new ReceiptPrinter(20);
