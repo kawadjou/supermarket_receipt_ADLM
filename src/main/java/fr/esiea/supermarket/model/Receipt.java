@@ -9,6 +9,12 @@ public class Receipt {
 
     public Double getTotalPrice() {
         double total = 0.0;
+        for (int i = 0; i < discounts.size(); i++) {
+            if (discounts.get(i).getProduct().getName().equals("Discount")){
+                total = total + discounts.get(i).getDiscountAmount();
+                discounts.remove(discounts.get(i));
+            }
+        }
         for (ReceiptItem item : this.items) {
             total += item.getTotalPrice();
         }

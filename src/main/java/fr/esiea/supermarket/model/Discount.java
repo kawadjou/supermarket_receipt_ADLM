@@ -10,6 +10,12 @@ public class Discount {
         this.description = description;
         this.discountAmount = discountAmount;
     }
+    public Discount(String description, double discountAmount) {
+      Product discoutpd = new Product("Discount");
+      this.product = discoutpd;
+      this.description = description;
+      this.discountAmount = discountAmount;
+    }
 
     public String getDescription() {
         return description;

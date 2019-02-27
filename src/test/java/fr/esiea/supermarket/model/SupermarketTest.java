@@ -303,4 +303,26 @@ public class SupermarketTest {
         Assertions.assertThat(printer.printReceipt(receipt)).isEqualTo("toothpaste                         15.00" + "\n" +"  5.00 * 3"+ "\n"+"apples                              2.50" +"\n"+ "10.0% off(toothpaste)              -1.50"+"\n"+ "\n"+"Total:                             16.00");
 
     }
+    @Test
+    public void BundleTest(){
+        SupermarketCatalog catalog = new FakeCatalog();
+        Product toothpaste = new Product("toothpaste", ProductUnit.Each);
+        Product apples = new Product("apples", ProductUnit.Each);
+        catalog.addProduct(toothpaste,2);
+        catalog.addProduct(apples,2);
+        ShoppingCart cart = new ShoppingCart();
+
+        cart.addItemQuantity(toothpaste, 3);
+        cart.addItemQuantity(apples,2);
+
+        Teller teller = new Teller(catalog);
+        Bundle bundle = new Bundle(6);
+        bundle.addProducttoBendle(toothpaste,2);
+        bundle.addProducttoBendle(apples,2);
+        teller.addBundle(bundle);
+        Receipt receipt = teller.checksOutArticlesFrom(cart);
+        Assertions.assertThat(receipt.getTotalPrice()).as("cart price").isEqualTo(8);
+
+
+    }
 }

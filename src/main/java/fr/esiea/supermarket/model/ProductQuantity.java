@@ -2,7 +2,7 @@ package fr.esiea.supermarket.model;
 
 public class ProductQuantity {
     private final Product product;
-    private final double quantity;
+    private double quantity;
 
     public ProductQuantity(Product product, double weight) {
         this.product = product;
@@ -16,4 +16,8 @@ public class ProductQuantity {
     public double getQuantity() {
         return quantity;
     }
+    public void setQuantity(double q) {
+        this.quantity = q;
+    }
 }
+
