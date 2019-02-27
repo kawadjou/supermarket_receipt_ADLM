@@ -36,13 +36,12 @@ public class ShoppingCart {
     }
 
     void handleOffers(Receipt receipt, Map<Product, Offer> offers, SupermarketCatalog catalog) {
-        Map<Product, Double> items = productQuantities();
+        Map<Product, Double> entities = productQuantities();
         for (Product p: productQuantities().keySet()) {
             if (offers.containsKey(p)) {
                 Offer offer = offers.get(p);
-                items = offer.calculateDiscount(items, catalog);
+                entities = offer.calcDiscount(entities, catalog);
                 Discount discount = offer.getSuperOffer();
-                discount = offer.getSuperOffer();
                 if (discount != null)
                     receipt.addDiscount(discount);
             }

@@ -28,18 +28,15 @@ public class TenPercent implements Offer {
         }
 
         @Override
-        public Map<Product, Double> calculateDiscount(Map<Product, Double> productQuantities, SupermarketCatalog catalog){
-            double quantity = productQuantities.get(productForOffer);
+        public Map<Product, Double> calcDiscount(Map<Product, Double> nbproducts, SupermarketCatalog catalog){
+            double quantity = nbproducts.get(productForOffer);
             double unitPrice = catalog.getUnitPrice(productForOffer);
-
 
             discount = new Discount(productForOffer, this.argumentForOffer + "% off", quantity * unitPrice * this.argumentForOffer / 100.0);
 
+            nbproducts.put(productForOffer,quantity);
 
-
-            productQuantities.put(productForOffer,(double)quantity);
-
-            return productQuantities;
+            return nbproducts;
         }
 
     }

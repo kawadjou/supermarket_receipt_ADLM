@@ -8,7 +8,7 @@ import java.util.Map;
 
 public interface Offer {
 
-    Map<Product,Double> calculateDiscount(Map<Product, Double> productQuantities, SupermarketCatalog catalog);
+    Map<Product,Double> calcDiscount(Map<Product, Double> productQuantities, SupermarketCatalog catalog);
 
 
     Discount getSuperOffer();
