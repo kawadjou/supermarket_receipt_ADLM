@@ -54,10 +54,16 @@ public class SupermarketTest {
         cart.addItemQuantity(toothbrush, 3.0);
         ShoppingCart cart2 = new ShoppingCart();
         cart2.addItemQuantity(toothbrush, 1.0);
-
+        ShoppingCart cart3 = new ShoppingCart();
+        cart3.addItemQuantity(toothbrush, 3.0);
+        ShoppingCart cart4 = new ShoppingCart();
+        cart4.addItemQuantity(toothbrush, 3.0);
 
         Teller teller = new Teller(catalog);
         teller.addSpecialOffer(new ThreeForTwo(toothbrush));
+
+        Teller teller4 = new Teller(catalog);
+        teller4.addSpecialOffer(new ThreeForTwo(toothbrush));
 
         Teller teller2 = new Teller(catalog);
         teller2.addSpecialOffer(new FiveForAmount(toothbrush,0));
@@ -67,9 +73,9 @@ public class SupermarketTest {
 
 
         Receipt receipt = teller.checksOutArticlesFrom(cart);
-        Receipt receipt2 = teller.checksOutArticlesFrom(cart2);
-        Receipt receipt3 = teller2.checksOutArticlesFrom(cart);
-        Receipt receipt4 = teller3.checksOutArticlesFrom(cart);
+        Receipt receipt2 = teller4.checksOutArticlesFrom(cart2);
+        Receipt receipt3 = teller2.checksOutArticlesFrom(cart3);
+        Receipt receipt4 = teller3.checksOutArticlesFrom(cart4);
 
         Assertions.assertThat(receipt.getTotalPrice()).isEqualTo(0.99 * 2);
         Assertions.assertThat(receipt2.getTotalPrice()).isEqualTo(0.99 * 1);
