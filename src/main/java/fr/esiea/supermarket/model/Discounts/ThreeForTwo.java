@@ -38,15 +38,9 @@ public class ThreeForTwo implements Offer{
             discount = new Discount(productForOffer, "3 for 2", discountAmount);
         }
 
-        productQuantities.put(productForOffer,(double)quantityAsInt % 3);
+        productQuantities.put(productForOffer, (double)quantityAsInt % 3);
 
         return productQuantities;
     }
-
-
-
-
-
-
 
 }
