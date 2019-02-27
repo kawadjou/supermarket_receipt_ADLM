@@ -1,6 +1,7 @@
 package fr.esiea.supermarket.model;
 
 
+import fr.esiea.supermarket.ReceiptPrinter;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -274,5 +275,23 @@ public class SupermarketTest {
         Assertions.assertThat(receipt.getTotalPrice()).as("cart price").isEqualTo(35);
 
     }
+    @Test
+    public void ReceiptPrinterTest(){
+        SupermarketCatalog catalog = new FakeCatalog();
+        Product toothpaste = new Product("toothpaste", ProductUnit.Each);
+        Product apples = new Product("apples", ProductUnit.Kilo);
+        catalog.addProduct(toothpaste,5);
+        catalog.addProduct(apples,2.5);
+        ShoppingCart cart = new ShoppingCart();
+        cart.addItemQuantity(toothpaste, 3);
+        cart.addItemQuantity(apples,1);
+        Teller teller = new Teller(catalog);
+        teller.addSpecialOffer(SpecialOfferType.TenPercentDiscount, toothpaste, 10.0);
+        Receipt receipt = teller.checksOutArticlesFrom(cart);
+        ReceiptPrinter printer = new ReceiptPrinter();
+        ReceiptPrinter printer2 = new ReceiptPrinter(20);
+        printer.printReceipt(receipt);
+        Assertions.assertThat(printer.printReceipt(receipt)).isEqualTo("toothpaste                         15.00" + "\n" +"  5.00 * 3"+ "\n"+"apples                              2.50" +"\n"+ "10.0% off(toothpaste)              -1.50"+"\n"+ "\n"+"Total:                             16.00");
 
+    }
 }
