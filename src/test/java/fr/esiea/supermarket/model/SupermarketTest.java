@@ -67,12 +67,12 @@ public class SupermarketTest {
 
 
         Receipt receipt = teller.checksOutArticlesFrom(cart);
-        //Receipt receipt2 = teller.checksOutArticlesFrom(cart2);
+        Receipt receipt2 = teller.checksOutArticlesFrom(cart2);
         Receipt receipt3 = teller2.checksOutArticlesFrom(cart);
         Receipt receipt4 = teller3.checksOutArticlesFrom(cart);
 
         Assertions.assertThat(receipt.getTotalPrice()).isEqualTo(0.99 * 2);
-        //Assertions.assertThat(receipt2.getTotalPrice()).isEqualTo(0.99 * 1);
+        Assertions.assertThat(receipt2.getTotalPrice()).isEqualTo(0.99 * 1);
         Assertions.assertThat(receipt3.getTotalPrice()).isEqualTo(0.99 * 3);
         Assertions.assertThat(receipt4.getTotalPrice()).isEqualTo(0.99 * 3);
 
@@ -119,12 +119,13 @@ public class SupermarketTest {
 
         Teller teller = new Teller(catalog);
         teller.addSpecialOffer(new TwoForAmount(toothpaste,3));
-
         Receipt receipt = teller.checksOutArticlesFrom(cart);
-        //Receipt receipt2 = teller.checksOutArticlesFrom(cart2);
-
         Assertions.assertThat(receipt.getTotalPrice()).as("cart price").isEqualTo(3);
-        //Assertions.assertThat(receipt2.getTotalPrice()).as("cart price").isEqualTo(2);
+
+        Teller teller2 = new Teller(catalog);
+        teller2.addSpecialOffer(new TwoForAmount(toothpaste,3));
+        Receipt receipt2 = teller2.checksOutArticlesFrom(cart2);
+        Assertions.assertThat(receipt2.getTotalPrice()).as("cart price").isEqualTo(2);
 
 
     }
@@ -138,28 +139,32 @@ public class SupermarketTest {
         catalog.addProduct(toothpaste,2);
 
         ShoppingCart cart = new ShoppingCart();
-        cart.addItemQuantity(toothpaste, 6);
+        cart.addItemQuantity(toothpaste, 5);
+        ShoppingCart cart3 = new ShoppingCart();
+        cart3.addItemQuantity(toothpaste, 5);
+        ShoppingCart cart4 = new ShoppingCart();
+        cart4.addItemQuantity(toothpaste, 5);
         ShoppingCart cart2 = new ShoppingCart();
         cart2.addItemQuantity(toothpaste, 3);
 
         Teller teller = new Teller(catalog);
         teller.addSpecialOffer(new FiveForAmount(toothpaste,7));
+        Teller tellerb = new Teller(catalog);
+        tellerb.addSpecialOffer(new FiveForAmount(toothpaste,7));
         Teller teller2 = new Teller(catalog);
         teller2.addSpecialOffer(new ThreeForTwo(toothpaste));
         Teller teller3 = new Teller(catalog);
         teller3.addSpecialOffer(new FiveForAmount( apples,7));
 
-
-
         Receipt receipt = teller.checksOutArticlesFrom(cart);
-        //Receipt receipt2 = teller.checksOutArticlesFrom(cart2);
-        //Receipt receipt3 = teller2.checksOutArticlesFrom(cart);
-        Receipt receipt4 = teller3.checksOutArticlesFrom(cart);
+        Receipt receipt2 = tellerb.checksOutArticlesFrom(cart2);
+        Receipt receipt3 = teller2.checksOutArticlesFrom(cart3);
+        Receipt receipt4 = teller3.checksOutArticlesFrom(cart4);
 
-        Assertions.assertThat(receipt.getTotalPrice()).isEqualTo(9);
-        //Assertions.assertThat(receipt2.getTotalPrice()).isEqualTo(6);
-        //Assertions.assertThat(receipt3.getTotalPrice()).isEqualTo(8);
-        Assertions.assertThat(receipt4.getTotalPrice()).isEqualTo(12);
+        Assertions.assertThat(receipt.getTotalPrice()).isEqualTo(7);
+        Assertions.assertThat(receipt2.getTotalPrice()).isEqualTo(6);
+        Assertions.assertThat(receipt3.getTotalPrice()).isEqualTo(8);
+        Assertions.assertThat(receipt4.getTotalPrice()).isEqualTo(10);
 
 
     }
@@ -249,9 +254,6 @@ public class SupermarketTest {
         Assertions.assertThat(ritem2.equals(ritem3)).isFalse();
         Assertions.assertThat(ritem3.equals(ritem4)).isFalse();
         Assertions.assertThat(ritem4.equals(ritem5)).isFalse();
-
-
-
 
 
     }
