@@ -21,5 +21,5 @@ Projet architecture logicielle AMEKOU_DAUGUET_LAVALLART_MITSAKIS
 
 * **TP1 :** [x]
 * **TP2 :** [x]
-* **TP3 :** [x] Only 50% (Refactoring and Coverage)
+* **TP3 :** [x] 
 * **TP4 :** [ ]
